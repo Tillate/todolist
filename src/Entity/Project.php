@@ -31,6 +31,17 @@ class Project
     private $description;
 
     /**
+     * @ORM\Column(type="date")
+     */
+    private $start_date;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $end_date;
+
+
+    /**
      * @ORM\OneToMany(targetEntity=Task::class, mappedBy="project")
      */
     private $tasks;
@@ -65,6 +76,30 @@ class Project
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->start_date;
+    }
+
+    public function setStartDate(\DateTimeInterface $start_date): self
+    {
+        $this->start_date = $start_date;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->end_date;
+    }
+
+    public function setEndDate(\DateTimeInterface $end_date): self
+    {
+        $this->end_date = $end_date;
 
         return $this;
     }
