@@ -39,7 +39,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/project/add/save", methods={"POST"}, name="project_add_save")
      */
-    public function projectsAddSave(ManagerRegistry $doctrine, Request $request): Response
+    public function addSaveProject(ManagerRegistry $doctrine, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
 
@@ -68,7 +68,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/project/save/{id}", methods={"POST"}, name="project_save_id")
      */
-    public function projectsSaveId(ManagerRegistry $doctrine, Request $request, Project $project): Response
+    public function saveIdProject(ManagerRegistry $doctrine, Request $request, Project $project): Response
     {
         $entityManager = $doctrine->getManager();
 
@@ -83,5 +83,16 @@ class ProjectController extends AbstractController
         return $this->redirectToRoute('project');
     }
 
+    /**
+     * @Route("/project/delete/{id}", methods={"GET"}, name="project_delete_id")
+     */
+    public function deleteIdProject(ManagerRegistry $doctrine, Project $project): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($project);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('project');
+    }
 
 }
