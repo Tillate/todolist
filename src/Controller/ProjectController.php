@@ -33,7 +33,7 @@ class ProjectController extends AbstractController
     public function addProject(UserRepository $userRepository): Response
     {
         
-        return $this->render('project/addproject.html.twig') ;
+        return $this->render('project/addProject.html.twig') ;
     }
 
     /**
@@ -54,4 +54,17 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('project');
     }
+
+    /**
+     * @Route("/project/edit/{id}", name="project_edit")
+     */
+    public function editProject(Project $project): Response
+    {
+        return $this->render('project/editProject.html.twig', [
+            'project' => $project,
+        ]);
+    }
+
+    
+
 }
