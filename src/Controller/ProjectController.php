@@ -65,6 +65,23 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    
+    /**
+     * @Route("/project/save/{id}", methods={"POST"}, name="project_save_id")
+     */
+    public function projectsSaveId(ManagerRegistry $doctrine, Request $request, Project $project): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        $project->setName($request->request->get('name'));
+        $project->setDescription($request->request->get('description'));
+        $project->setStartDate(new \DateTime($request->request->get('start_date')));
+        $project->setEndDate(new \DateTime($request->request->get('end_date')));
+        
+        $entityManager->persist($project);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('project');
+    }
+
 
 }
