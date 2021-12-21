@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Project;
 use App\Entity\User;
+use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
@@ -53,7 +55,6 @@ class UserController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $entityManager->persist($user);
-        // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
         
 
@@ -74,9 +75,9 @@ class UserController extends AbstractController
     }
 
      /**
-     * @Route("/user/save2/{id}", methods={"POST"}, name="save_user")
+     * @Route("/user/saveEdit/{id}", methods={"POST"}, name="save_user")
      */
-    public function saveUser2(Request $request, ManagerRegistry $doctrine, User $user):Response
+    public function saveEdit(Request $request, ManagerRegistry $doctrine, User $user):Response
     {   
         $user -> setFirstName($request->request->get('first_name'));
         $user -> setLastName($request->request->get('last_name'));
@@ -101,6 +102,20 @@ class UserController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('users');
+    }
+
+    /**
+     * @Route("/user/{id}/project", methods={"GET"}, name="user_id_project")
+     */
+    public function userProjects(User $user, ProjectRepository $projectRepository, Project $project): Response
+    {
+        $projects = $projectRepository->findAll();
+
+
+        return $this->render('user/projectsuser.html.twig', [
+            'user' => $user,
+            'projects' => $projects,
+        ]);
     }
 
 }

@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Ajouter un projet</title>
+  <title>Tasks</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -28,46 +28,36 @@
 
 </head>
 <body>
-
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Ajouter un projet</h4>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="one-half column" style="margin-top: 25%">
+      <h4>Liste des Tâches</h4>
     </div>
-    <!-- The above form looks like this -->
-    <form action="/project/add/save" method="POST">
-      <div class="row">
-        <div class="column">
-          <label for="name">Nom</label>
-          <input class="u-full-width" type="text" id="name" name="name">
-        </div>
-      </div>
-      <div class="row">
-        <div class="column">
-          <label for="description">Description</label>
-          <input class="u-full-width" type="text" id="description" name="description">
-        </div>
-      </div>
-      <div class="row">
-        <div class="column">
-          <label for="start_date">Date de début</label>
-          <input class="u-full-width" type="date" id="start_date" name="start_date">
-        </div>
-      </div>
-      <div class="row">
-        <div class="column">
-          <label for="end_date">Date de fin</label>
-          <input class="u-full-width" type="date" id="end_date" name="end_date" >
-        </div>
-      </div>
-      <a class="button button-primary" href="/project">Annuler</a>
-      <input class="button-primary" type="submit" value="Save">
-    </form>
-  </div>
+  </div>  
+  <a class="button button-primary" href="/task/add">Ajouter une tâche</a>
 
+    <table class="u-full-width">
+      <thead>
+          <tr>
+              <th>Nom</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+
+{# {% for task in tasks %}
+      <tbody>
+          <tr>
+              <td>{{ task.getName }}</td>
+              <td>{{ task.getDescription }}</td>
+              <td><a href="/task/edit/{{ task.getId }}" class="button button-primary">Modifier</a></td>
+          </tr>
+      </tbody>
+{% endfor %} #}
+
+    </table>
+</div>
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>

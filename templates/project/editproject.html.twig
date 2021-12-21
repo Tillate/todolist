@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Your page title here :)</title>
+  <title>Modifier projet</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -34,7 +34,7 @@
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
-        <h4>Edit project</h4>
+        <h4>Modifier un projet</h4>
         <p></p>
       </div>
     </div>
@@ -42,7 +42,7 @@
     <form action="/project/save/{{ project.getId }}" method="POST">
       <div class="row">
         <div class="column">
-          <label for="name">Name</label>
+          <label for="name">Nom</label>
           <input class="u-full-width" type="text" id="name" name="name" value="{{ project.getName }}">
         </div>
       </div>
@@ -54,19 +54,19 @@
       </div>
       <div class="row">
         <div class="column">
-          <label for="start_date">Start date</label>
-          <input class="u-full-width" type="text" id="start_date" name="start_date" placeholder="aaaa/mm/jj" value="{{ project.getStartDate|date("d M Y") }}">
+          <label for="start_date">Date de début</label>
+          <input class="u-full-width" type="date" id="start_date" name="start_date" value="{{ project.getStartDate|date("d M Y") }}">
         </div>
       </div>
       <div class="row">
         <div class="column">
-          <label for="end_date">End date</label>
-          <input class="u-full-width" type="text" id="end_date" name="end_date" placeholder="aaaa/mm/jj" value="{{ project.getEndDate|date("d M Y") }}">
+          <label for="end_date">Date de fin</label>
+          <input class="u-full-width" type="date" id="end_date" name="end_date" value="{{ project.getEndDate|date("d M Y") }}">
         </div>
       </div>
-      <a class="button button-primary" href="/project">Cancel</a>
-      <a class="button button-primary" href="/project/delete/{{ project.getId }}">Delete</a>
-      <input class="button-primary" type="submit" value="Save">
+      <a class="button button-primary" href="/project">Annuler</a>
+      <a class="button button-primary" href="/project/delete/{{ project.getId }}">Supprimer</a>
+      <input class="button-primary" type="submit" value="Enregistrer">
     </form>
   </div>
 

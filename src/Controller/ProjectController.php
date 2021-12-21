@@ -95,4 +95,25 @@ class ProjectController extends AbstractController
         return $this->redirectToRoute('project');
     }
 
+    /**
+     * @Route("/project/{id}/user", methods={"GET"}, name="project_addUser")
+     */
+    public function addUserProject(UserRepository $userRepository, Project $project): Response
+    {
+        $users = $userRepository->findAll();
+
+        return $this->render('project/addUserProject.html.twig', [
+            'project' => $project,
+            'users' => $users,
+        ]);
+    }
+
+    /**
+     * @Route("/project/{id}/user/save", methods={"POST"}, name="project_addUser_save")
+     */
+    public function addUserSaveProject(UserRepository $userRepository, Project $project): Response
+    {
+        return $this->redirectToRoute('project');
+    }
+
 }
