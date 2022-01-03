@@ -36,8 +36,9 @@ class User
     private $last_name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Project::class, inversedBy="users")
-     */
+    * @ORM\ManyToMany(targetEntity=Project::class, inversedBy="users")
+    * @ORM\joinTable(name="project_user")
+    */
     private $projects;
 
     public function __construct()

@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +31,7 @@ class ProjectController extends AbstractController
      * @Route("/project/add", methods={"GET","POST"}, name="project_add")
      * 
      */
-    public function addProject(UserRepository $userRepository): Response
+    public function addProject(): Response
     {
         
         return $this->render('project/addProject.html.twig') ;
@@ -60,8 +61,11 @@ class ProjectController extends AbstractController
      */
     public function editProject(Project $project): Response
     {
+        $users = $project->getUsers();
+
         return $this->render('project/editProject.html.twig', [
             'project' => $project,
+            'users'=> $users
         ]);
     }
 
@@ -102,17 +106,38 @@ class ProjectController extends AbstractController
     {
         $users = $userRepository->findAll();
 
+        $projectUsers = $project->getUsers();
+
         return $this->render('project/addUserProject.html.twig', [
             'project' => $project,
             'users' => $users,
+            'projectUsers' => $projectUsers,
         ]);
     }
 
     /**
      * @Route("/project/{id}/user/save", methods={"POST"}, name="project_addUser_save")
      */
-    public function addUserSaveProject(UserRepository $userRepository, Project $project): Response
+    public function addUserSaveProject(LoggerInterface $logger, ManagerRegistry $doctrine, UserRepository $userRepository, Request $request, Project $project): Response
     {
+
+        $entityManager = $doctrine->getManager();
+
+        $project->clearUsers();
+
+        $listIdUser = $request->request->get('user_id', []);
+
+        $logger->debug("valeur userId", ["userID"=>$listIdUser]);
+
+        foreach($listIdUser as $userId) {
+            $user= $userRepository->find($userId);
+            $project->addUser($user);
+        }
+
+        $entityManager->persist($project);
+        $entityManager->flush();
+
+
         return $this->redirectToRoute('project');
     }
 

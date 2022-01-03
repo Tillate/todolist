@@ -40,14 +40,21 @@ class Project
      */
     private $end_date;
 
+    /**
+    * @ORM\ManyToMany(targetEntity=User::class, mappedBy="projects")
+    * @ORM\JoinTable(name="project_user")
+    */
+    private $users; 
 
     /**
      * @ORM\OneToMany(targetEntity=Task::class, mappedBy="project")
+     * @ORM\JoinTable(name="project_user")
      */
     private $tasks;
 
     public function __construct()
     {
+        $this->users = new ArrayCollection();
         $this->tasks = new ArrayCollection();
     }
 
@@ -101,6 +108,42 @@ class Project
     {
         $this->end_date = $end_date;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeProject($this);
+        }
+
+        return $this;
+    }
+
+    public function clearUsers(): self
+    {
+        foreach($this->users as $user) {
+            $this->removeUser($user);
+        }
+        
         return $this;
     }
 
