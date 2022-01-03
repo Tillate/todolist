@@ -1,47 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "layouts/base.html.twig" %}
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Ajouter un projet</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+{% block title %}Ajouter une tâches{% endblock %}
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/skeleton.css">
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="/images/favicon.png">
-
-</head>
-<body>
+{% block body %}
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
-        <h4>Ajouter une tache</h4>
+        <h4>Ajouter une tâche</h4>
       </div>
     </div>
     <!-- The above form looks like this -->
     <form action="/task/add/save" method="POST">
       <div class="row">
         <div class="column">
-          <label for="name">Nom</label>
+          <label for="name">Nom de la tâche</label>
           <input class="u-full-width" type="text" id="name" name="name">
         </div>
       </div>
@@ -70,5 +45,4 @@
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-</body>
-</html>
+{% endblock %}

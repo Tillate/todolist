@@ -1,33 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "layouts/base.html.twig" %}
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Liste des projets</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+{% block title %}Liste des projets{% endblock %}
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/skeleton.css">
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="/images/favicon.png">
-
-</head>
-<body>
+{% block body %}
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
@@ -61,6 +36,7 @@
                             <td>{{ project.getEndDate|date("d M Y") }}</td>
                             <td><a href="/project/{{ project.getId }}/user" class="button button-primary">Ajouter un utilisateur</a></td>
                             <td><a href="/project/edit/{{ project.getId }}" class="button button-primary">Modifier</a></td>
+                            <td><a href="/task" class="button button-primary">Ajouter une tâche</a></td>
                         </tr>
 {% endfor %}
                     </tbody>
@@ -72,5 +48,5 @@
 </div>
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-</body>
-</html>
+{% endblock %}
+

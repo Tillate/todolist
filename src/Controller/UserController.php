@@ -7,11 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Project;
 use App\Entity\User;
-use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Project;
+use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManager;
 
 
@@ -34,7 +34,7 @@ class UserController extends AbstractController
      * @Route("/user/add", methods={"GET","POST"}, name="user")
      * 
      */
-    public function addUser(UserRepository $userRepository): Response
+    public function addUser(): Response
     {
         
         return $this->render('user/adduser.html.twig') ;
@@ -65,7 +65,7 @@ class UserController extends AbstractController
      * @Route("/user/edit/{id}", methods={"GET","POST"}, name="user_edit")
      * 
      */
-    public function editUser(UserRepository $userRepository, User $user): Response
+    public function editUser(User $user): Response
     {
         
         return $this->render('user/edituser.html.twig',[
@@ -95,7 +95,7 @@ class UserController extends AbstractController
      * @Route("/user/delete/{id}", methods={"GET", "DELETE"}, name="user_delete")
      * 
      */
-    public function deleteUser(Request $request, User $user, ManagerRegistry $doctrine)
+    public function deleteUser(User $user, ManagerRegistry $doctrine)
     {
         $entityManager = $doctrine->getManager();
         $entityManager->remove($user);
@@ -107,9 +107,9 @@ class UserController extends AbstractController
     /**
      * @Route("/user/{id}/project", methods={"GET"}, name="user_id_project")
      */
-    public function userProjects(User $user, ProjectRepository $projectRepository, Project $project): Response
+    public function userProjects(User $user): Response
     {
-        $projects = $projectRepository->findAll();
+        $projects = $user->getProjects();
 
 
         return $this->render('user/projectsuser.html.twig', [

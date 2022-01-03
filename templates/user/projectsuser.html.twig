@@ -1,40 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "layouts/base.html.twig" %}
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Projets utilisateur</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+{% block title %}Projets de l'utilisateur{% endblock %}
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/skeleton.css">
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="/images/favicon.png">
-
-</head>
-<body>
+{% block body %}
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
-        <h4>Projets de utilisateur</h4>  
+        <h4>Projets de {{ user.getFirstName }} {{ user.getLastName }}</h4>  
       </div>
     </div>
 
@@ -55,8 +31,9 @@
               <td>{{ project.getDescription }}</td>
               <td>{{ project.getStartDate|date("d M Y") }}</td>
               <td>{{ project.getEndDate|date("d M Y") }}</td>
-              <td><a href="/project/{{ project.getId }}/user" class="button button-primary">Ajouter un utilisateur</a></td>
               <td><a href="/project/edit/{{ project.getId }}" class="button button-primary">Modifier</a></td>
+              {# <td><a href="/project/{{ project.getId }}/user" class="button button-primary">Ajouter un utilisateur</a></td>
+              <td><a href="/project/edit/{{ project.getId }}" class="button button-primary">Modifier</a></td> #}
           </tr>
       </tbody>
 {% endfor %}
@@ -64,11 +41,10 @@
     </table>
         
     <!-- The above form looks like this -->
-      <a class="button button-primary" href="/user">Cancel</a>
-      <input class="button-primary" type="submit" value="Save">
+      <a class="button button-primary" href="/user">Retour</a>
+      {# <input class="button-primary" type="submit" value="Save"> #}
   </div>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-</body>
-</html>
+{% endblock %}
