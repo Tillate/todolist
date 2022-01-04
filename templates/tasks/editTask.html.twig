@@ -1,48 +1,50 @@
 {% extends "layouts/base.html.twig" %}
 
-{% block title %}Ajouter une tâches{% endblock %}
+{% block title %}Modifier une tâche{% endblock %}
+
 
 {% block body %}
-
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
+    <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 5%">
-        <h4>Ajouter une tâche à {{project.getName}} </h4>
+        <h4>Modifier une tâche</h4>
+        <p></p>
       </div>
     </div>
-    <!-- The above form looks like this -->
-    <form action="/task/{{project.getId}}/add/save" method="POST">
+    <form action="/task/{{ project.getId }}/saveEdit/{{task.getId}}" method="POST">
       <div class="row">
         <div class="column">
-          <label for="name">Nom de la tâche</label>
-          <input class="u-full-width" type="text" id="name" name="name">
+          <label for="name">Nom</label>
+          <input class="u-full-width" type="text" id="name" name="name" value="{{ task.getName }}">
         </div>
       </div>
       <div class="row">
         <div class="column">
           <label for="description">Description</label>
-          <input class="u-full-width" type="text" id="description" name="description">
+          <input class="u-full-width" type="text" id="description" name="description" value="{{ task.getDescription }}">
         </div>
       </div>
       <div class="row">
         <div class="column">
           <label for="start_date">Date de début</label>
-          <input class="u-full-width" type="date" id="start_date" name="start_date">
+          <input class="u-full-width" type="text" id="start_date" name="start_date" placeholder="aaaa/mm/jj" value="{{ task.getStartDate|date("d M Y") }}">
         </div>
       </div>
       <div class="row">
         <div class="column">
           <label for="end_date">Date de fin</label>
-          <input class="u-full-width" type="date" id="end_date" name="end_date" >
+          <input class="u-full-width" type="text" id="end_date" name="end_date" placeholder="aaaa/mm/jj" value="{{ task.getEndDate|date("d M Y") }}">
         </div>
       </div>
+      
+
       <a class="button button-primary" href="/project/{{project.getId}}/task">Annuler</a>
-      <input class="button-primary" type="submit" value="Save">
+      <a href="/task/{{ project.getId }}/delete/{{ task.getId }}"  class="button button-primary">Supprimer</a>
+      <input class="button-primary" type="submit" value="Enregistrer">
     </form>
   </div>
-
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 {% endblock %}

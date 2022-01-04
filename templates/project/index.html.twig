@@ -5,9 +5,9 @@
 {% block body %}
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<div class="container">
+<div class="container-tab">
     <div class="row">
-        <div class="one-half column" style="margin-top: 10%">
+        <div class="one-half column" style="margin-top: 2%">
             <h4>Liste des projets</h4>
         </div>
     </div>
@@ -25,6 +25,9 @@
                             <th>Description</th>
                             <th>Début</th>
                             <th>Fin</th>
+                            <th>Ajouter un utilisateur</th>
+                            <th>Modifier un projet</th>
+                            <th>Ajouter une tâches</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,9 +37,9 @@
                             <td>{{ project.getDescription }}</td>
                             <td>{{ project.getStartDate|date("d M Y") }}</td>
                             <td>{{ project.getEndDate|date("d M Y") }}</td>
-                            <td><a href="/project/{{ project.getId }}/user" class="button button-primary">Ajouter un utilisateur</a></td>
+                            <td><a href="/project/{{ project.getId }}/user" class="button button-primary">Ajouter</a></td>
                             <td><a href="/project/edit/{{ project.getId }}" class="button button-primary">Modifier</a></td>
-                            <td><a href="/task" class="button button-primary">Ajouter une tâche</a></td>
+                            <td><a href="/project/{{ project.getId }}/task" class="button button-primary">Ajouter</a></td>
                         </tr>
 {% endfor %}
                     </tbody>

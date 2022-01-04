@@ -7,31 +7,37 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
   <div class="row">
-    <div class="one-half column" style="margin-top: 25%">
-      <h4>Liste des Tâches</h4>
+    <div class="column" style="margin-top: 5%">
+      <h4>Liste des tâches du projet "{{project.getName}}"</h4>
     </div>
   </div>  
-  <a class="button button-primary" href="/task/add">Ajouter une tâche</a>
+  <a class="button button-primary" href="/project/{{project.getId}}/task/add">Ajouter une tâche</a>
 
     <table class="u-full-width">
       <thead>
           <tr>
               <th>Nom</th>
               <th>Description</th>
+              <th>Date de début</th>
+              <th>Date de fin</th>
+              <th>Edit</th>
           </tr>
       </thead>
 
-{# {% for task in tasks %}
+{% for task in tasks %}
       <tbody>
           <tr>
               <td>{{ task.getName }}</td>
               <td>{{ task.getDescription }}</td>
-              <td><a href="/task/edit/{{ task.getId }}" class="button button-primary">Modifier</a></td>
+              <td>{{ task.getStartDate|date("d M Y") }}</td>
+              <td>{{ task.getEndDate|date("d M Y") }}</td>
+              <td><a href="/project/{{ project.getId }}/task/{{task.getId}}/edit" class="button button-primary">Modifier</a></td>
           </tr>
-      </tbody>
-{% endfor %} #}
 
+      </tbody>
+{% endfor %}
     </table>
+    <a href="/project" class="button button-primary">Retour aux projets</a>
 </div>
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
