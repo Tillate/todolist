@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProjectController extends AbstractController
 {
@@ -40,7 +41,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/project/add/save", methods={"POST"}, name="project_add_save")
      */
-    public function addSaveProject(ManagerRegistry $doctrine, Request $request): Response
+    public function addSaveProject(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator): Response
     {
         $entityManager = $doctrine->getManager();
 
@@ -50,6 +51,15 @@ class ProjectController extends AbstractController
         $project->setStartDate(new \DateTime($request->request->get('start_date')));
         $project->setEndDate(new \DateTime($request->request->get('end_date')));
         
+        $errors = $validator->validate($project);
+
+        if (count($errors) > 0) {
+            // $errorsString = (string) $errors;
+            $this->addFlash('error', $errors);
+
+            return $this->render('project/addProject.html.twig');
+        }
+
         $entityManager->persist($project);
         $entityManager->flush();
 

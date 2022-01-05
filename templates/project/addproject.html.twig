@@ -12,6 +12,13 @@
         <h4>Ajouter un projet</h4>
       </div>
     </div>
+    {% for label, messages in app.flashes %}
+      {% for message in messages %}
+          <div class="flash-{{ label }}">
+              {{ message }}
+          </div>
+      {% endfor %}
+    {% endfor %}
     <!-- The above form looks like this -->
     <form action="/project/add/save" method="POST">
       <div class="row">

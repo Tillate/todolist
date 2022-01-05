@@ -9,7 +9,7 @@
     <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 5%">
-        <h4>Modifier une tâche</h4>
+        <h4>Modifier la tâche "{{ task.getName }}"</h4>
         <p></p>
       </div>
     </div>
@@ -38,6 +38,16 @@
           <input class="u-full-width" type="text" id="end_date" name="end_date" placeholder="aaaa/mm/jj" value="{{ task.getEndDate|date("d M Y") }}">
         </div>
       </div>
+     {# <div class="row">
+        <div class="column">
+          <label for="end_date">Utilisateurs</label>
+            <select class="u-full-width" id="users" name="users">
+            {% for user in users %}
+                  <option value="{{ user.getId }}" selected>{{ user.getFirstName }} {{ user.getLastName }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div> #}
       
 
       <a class="button button-primary" href="/project/{{project.getId}}/task">Annuler</a>

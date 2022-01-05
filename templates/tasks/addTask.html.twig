@@ -12,6 +12,14 @@
         <h4>Ajouter une tâche à {{project.getName}} </h4>
       </div>
     </div>
+
+    {% for label, messages in app.flashes %}
+      {% for message in messages %}
+          <div class="flash-{{ label }}">
+              {{ message }}
+          </div>
+      {% endfor %}
+    {% endfor %}
     <!-- The above form looks like this -->
     <form action="/task/{{project.getId}}/add/save" method="POST">
       <div class="row">

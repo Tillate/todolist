@@ -10,10 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Project;
-use App\Repository\ProjectRepository;
-use Doctrine\ORM\EntityManager;
-
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserController extends AbstractController
 {
@@ -44,7 +41,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/save", methods={"POST"}, name="user_save")
      */
-    public function saveUser(Request $request, ManagerRegistry $doctrine):Response
+    public function saveUser(Request $request, ManagerRegistry $doctrine, ValidatorInterface $validator):Response
     {
 
         $user = new User();
@@ -53,6 +50,15 @@ class UserController extends AbstractController
         $user -> setEmail($request->request->get('email'));
         
         $entityManager = $doctrine->getManager();
+
+        $errors = $validator->validate($user);
+
+        if (count($errors) > 0) {
+            // $errorsString = (string) $errors;
+            $this->addFlash('error', $errors);
+
+            return $this->render('user/adduser.html.twig');
+        }
 
         $entityManager->persist($user);
         $entityManager->flush();
