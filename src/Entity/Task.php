@@ -21,25 +21,33 @@ class Task
 
     /**
      * @ORM\Column(type="string", length=150)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir un nom de tâche."
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir une description de la tâche."
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir la date de début du projet."
+     * )
      */
     private $start_date;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir la date de début du projet."
+     * )
      */
     private $end_date;
 

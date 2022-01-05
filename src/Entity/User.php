@@ -23,19 +23,36 @@ class User
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir un email."
+     * )
+     * @Assert\Email(
+     * message = "L'email '{{ value }}' n'est pas valide."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir un prénom."
+     * )
+     * @Assert\Length(
+     * max = 50,
+     * maxMessage = "Le prénom ne peut dépasser {{ limit }} caractères."
+     * )
      */
     private $first_name;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir un prénom."
+     * )
+     * @Assert\Length(
+     * max = 50,
+     * maxMessage = "Le prénom ne peut dépasser {{ limit }} caractères."
+     * )
      */
     private $last_name;
 

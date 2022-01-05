@@ -13,10 +13,12 @@
     </div>
 
     {% for label, messages in app.flashes %}
-      {% for message in messages %}
+      {% for errors in messages %}
+        {% for error in errors %}
           <div class="flash-{{ label }}">
-              {{ message }}
+              {{ error.message }}
           </div>
+        {% endfor %}
       {% endfor %}
     {% endfor %}
 

@@ -23,25 +23,33 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=150)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir un nom de projet."
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir une description du projet."
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir la date de début du projet."
+     * )
      */
     private $start_date;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir la date de fin du projet."
+     * )
      */
     private $end_date;
 

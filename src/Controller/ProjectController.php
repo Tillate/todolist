@@ -45,11 +45,15 @@ class ProjectController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
 
+        $format = 'd/m/Y';
+
         $project = new Project();
         $project->setName($request->request->get('name'));
         $project->setDescription($request->request->get('description'));
         $project->setStartDate(new \DateTime($request->request->get('start_date')));
         $project->setEndDate(new \DateTime($request->request->get('end_date')));
+        //$project->setStartDate(\DateTime::createFromFormat($format,$request->request->get('start_date')));
+        //$project->setEndDate(\DateTime::createFromFormat($format,$request->request->get('end_date')));
         
         $errors = $validator->validate($project);
 
