@@ -41,7 +41,7 @@
       </div>
       <div class="row">
         <div class="column">
-          <label for="end_date">Utilisateurs</label>
+          <label for="end_date">Utilisateur(s) participant au projet</label>
             <select class="u-full-width" id="users" name="users">
             {% for user in users %}
                   <option value="{{ user.getId }}" selected>{{ user.getFirstName }} {{ user.getLastName }}</option>

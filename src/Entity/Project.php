@@ -39,17 +39,31 @@ class Project
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(
-     * message = "Erreur, merci de saisir la date de début du projet."
-     * )
+     * 
      */
     private $start_date;
 
     /**
-     * @ORM\Column(type="date")
+     * @var string
      * @Assert\NotBlank(
-     * message = "Erreur, merci de saisir la date de fin du projet."
+     * message = "Erreur, merci de saisir une date de début du projet."
      * )
+     * @Assert\DateTime(format="Y-m-d")
+     */
+    private $start_date_str;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(
+     * message = "Erreur, merci de saisir une date de fin du projet."
+     * )
+     * @Assert\DateTime(format="Y-m-d")
+     */
+    private $end_date_str;
+
+    /**
+     * @ORM\Column(type="date")
+     * 
      */
     private $end_date;
 
@@ -109,6 +123,18 @@ class Project
     {
         $this->start_date = $start_date;
 
+        return $this;
+    }
+
+    public function setStartDateStr(string $start_date_str)
+    {
+        $this->start_date_str =$start_date_str;
+        return $this;
+    }
+
+    public function setEndDateStr(string $end_date_str)
+    {
+        $this->end_date_str =$end_date_str;
         return $this;
     }
 

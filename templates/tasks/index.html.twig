@@ -23,8 +23,8 @@
               <th>Edit</th>
           </tr>
       </thead>
-
-{% for task in tasks %}
+{% if tasks %}
+  {% for task in tasks %}
       <tbody>
           <tr>
               <td>{{ task.getName }}</td>
@@ -33,9 +33,12 @@
               <td>{{ task.getEndDate|date("d M Y") }}</td>
               <td><a href="/project/{{ project.getId }}/task/{{task.getId}}/edit" class="button button-primary">Modifier</a></td>
           </tr>
+{% else %}
+              <td>Le projet ne dispose d'aucune tâche</td>
 
       </tbody>
-{% endfor %}
+  {% endfor %}
+{% endif %}
     </table>
     <a href="/project" class="button button-primary">Retour aux projets</a>
 </div>

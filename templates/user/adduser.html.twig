@@ -7,7 +7,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
+      <div class="one-half column" style="margin-top: 5%">
         <h4>Ajouter un utilisateur</h4>
       </div>
     </div>
@@ -15,7 +15,7 @@
     {% for label, messages in app.flashes %}
       {% for errors in messages %}
         {% for error in errors %}
-          <div class="flash-{{ label }}">
+          <div class="flash-{{ label }} error">
               {{ error.message }}
           </div>
         {% endfor %}

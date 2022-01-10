@@ -15,7 +15,7 @@
     {% for label, messages in app.flashes %}
       {% for errors in messages %}
         {% for error in errors %}
-          <div class="flash-{{ label }}">
+          <div class="flash-{{ label }} error">
               {{ error.message }}
           </div>
         {% endfor %}

@@ -41,20 +41,21 @@ class ProjectController extends AbstractController
     /**
      * @Route("/project/add/save", methods={"POST"}, name="project_add_save")
      */
-    public function addSaveProject(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator): Response
+    public function addSaveProject(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator,LoggerInterface $logger): Response
     {
         $entityManager = $doctrine->getManager();
 
-        $format = 'd/m/Y';
+        $format = 'Y-m-d';
 
         $project = new Project();
         $project->setName($request->request->get('name'));
         $project->setDescription($request->request->get('description'));
-        $project->setStartDate(new \DateTime($request->request->get('start_date')));
-        $project->setEndDate(new \DateTime($request->request->get('end_date')));
-        //$project->setStartDate(\DateTime::createFromFormat($format,$request->request->get('start_date')));
-        //$project->setEndDate(\DateTime::createFromFormat($format,$request->request->get('end_date')));
-        
+        //$project->setStartDate(new \DateTime($request->request->get('start_date')));
+        //$project->setEndDate(new \DateTime($request->request->get('end_date')));
+        $project->setStartDateStr($request->request->get('start_date'));
+        $project->setEndDateStr($request->request->get('end_date'));
+        //$logger->debug('valeur :', ['start_date'=>$request->request->get('start_date')]);
+        //$logger->debug('valeur :', ['end_date'=>$request->request->get('end_date')]);
         $errors = $validator->validate($project);
 
         if (count($errors) > 0) {
@@ -63,6 +64,9 @@ class ProjectController extends AbstractController
 
             return $this->render('project/addProject.html.twig');
         }
+
+        $project->setStartDate(\DateTime::createFromFormat($format,$request->request->get('start_date')));
+        $project->setEndDate(\DateTime::createFromFormat($format,$request->request->get('end_date')));
 
         $entityManager->persist($project);
         $entityManager->flush();
