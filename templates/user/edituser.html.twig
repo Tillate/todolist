@@ -4,15 +4,13 @@
 
 
 {% block body %}
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
         <h4>Modifier un utilisateur</h4>
       </div>
     </div>
-    <!-- The above form looks like this -->
     <form action="/user/saveEdit/{{userId}}" method="POST">
       <div class="row">
 
@@ -38,6 +36,5 @@
       <a href ='/user' class="button button-primary">Annuler</a>
     </form>
   </div>
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
 {% endblock %}

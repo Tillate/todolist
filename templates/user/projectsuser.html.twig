@@ -5,8 +5,6 @@
 
 {% block body %}
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
@@ -35,19 +33,13 @@
             <td>{{ project.getStartDate|date("d M Y") }}</td>
             <td>{{ project.getEndDate|date("d M Y") }}</td>
             <td><a href="/project/edit/{{ project.getId }}" class="button button-primary">Modifier</a></td>
-            {# <td><a href="/project/{{ project.getId }}/user" class="button button-primary">Ajouter un utilisateur</a></td>
-            <td><a href="/project/edit/{{ project.getId }}" class="button button-primary">Modifier</a></td> #}
 {% else %}
             <td>L'utilisateur ne participe à aucun projet</td>
         </tr>
       </tbody>
   {% endfor %}
 {% endif %}
-    </table>
-        
+    </table> 
       <a class="button button-primary" href="/user">Retour</a>
   </div>
-
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 {% endblock %}

@@ -3,8 +3,6 @@
 {% block title %}Ajouter un utilisateur{% endblock %}
 
 {% block body %}
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 5%">
@@ -22,7 +20,6 @@
       {% endfor %}
     {% endfor %}
 
- 
     <form action="/user/save" method="POST">
       <div class="row">
         <div class="six columns">
@@ -43,6 +40,4 @@
     </form>
   </div>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 {% endblock %}
