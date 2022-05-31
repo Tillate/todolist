@@ -33,7 +33,6 @@ class UserController extends AbstractController
      */
     public function addUser(): Response
     {
-        
         return $this->render('user/adduser.html.twig') ;
     }
 
@@ -43,27 +42,22 @@ class UserController extends AbstractController
      */
     public function saveUser(Request $request, ManagerRegistry $doctrine, ValidatorInterface $validator):Response
     {
-
         $user = new User();
         $user -> setFirstName($request->request->get('first_name'));
         $user -> setLastName($request->request->get('last_name'));
         $user -> setEmail($request->request->get('email'));
         
         $entityManager = $doctrine->getManager();
-
         $errors = $validator->validate($user);
 
         if (count($errors) > 0) {
-            // $errorsString = (string) $errors;
             $this->addFlash('error', $errors);
-
             return $this->render('user/adduser.html.twig');
         }
 
         $entityManager->persist($user);
         $entityManager->flush();
         
-
         return $this->redirectToRoute('users');
     }
 
@@ -73,7 +67,6 @@ class UserController extends AbstractController
      */
     public function editUser(User $user): Response
     {
-        
         return $this->render('user/edituser.html.twig',[
             'userId' => $user->getId(),
             'user' => $user
@@ -90,7 +83,6 @@ class UserController extends AbstractController
         $user -> setEmail($request->request->get('email'));
         
         $entityManager = $doctrine->getManager();
-
         $entityManager->persist($user);
         $entityManager->flush();
         
@@ -116,7 +108,6 @@ class UserController extends AbstractController
     public function userProjects(User $user): Response
     {
         $projects = $user->getProjects();
-
 
         return $this->render('user/projectsuser.html.twig', [
             'user' => $user,

@@ -15,19 +15,24 @@
     <!-- The above form looks like this -->
     <form action="/user/saveEdit/{{userId}}" method="POST">
       <div class="row">
+
         <div class="six columns">
           <label for="limit" >Prenom</label>
           <input class="u-full-width" type="text"  name="first_name" value="{{user.getFirstName}}">
         </div>
+
         <div class="six columns">
           <label for="offset">Nom</label>
           <input class="u-full-width" type="text"  name="last_name" value="{{user.getLastName}}">
         </div>
+
         <div>
           <label for="offset">Email</label>
           <input class="u-full-width" type="text"  name="email" value="{{user.getEmail}}">
         </div>
+
       </div>
+      
       <input class="button-primary" type="submit" value="Enregistrer">
       <a href="/user/delete/{{ user.getId }}"  class="button button-primary">Supprimer</a>
       <a href ='/user' class="button button-primary">Annuler</a>

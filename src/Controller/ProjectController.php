@@ -44,7 +44,6 @@ class ProjectController extends AbstractController
     public function addSaveProject(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator,LoggerInterface $logger): Response
     {
         $entityManager = $doctrine->getManager();
-
         $format = 'Y-m-d';
 
         $project = new Project();
@@ -123,7 +122,6 @@ class ProjectController extends AbstractController
     public function addUserProject(UserRepository $userRepository, Project $project): Response
     {
         $users = $userRepository->findAll();
-
         $projectUsers = $project->getUsers();
 
         return $this->render('project/addUserProject.html.twig', [
@@ -138,11 +136,9 @@ class ProjectController extends AbstractController
      */
     public function addUserSaveProject(LoggerInterface $logger, ManagerRegistry $doctrine, UserRepository $userRepository, Request $request, Project $project): Response
     {
-
         $entityManager = $doctrine->getManager();
 
         $project->clearUsers();
-
         $listIdUser = $request->request->get('user_id', []);
 
         $logger->debug("valeur userId", ["userID"=>$listIdUser]);
@@ -154,7 +150,6 @@ class ProjectController extends AbstractController
 
         $entityManager->persist($project);
         $entityManager->flush();
-
 
         return $this->redirectToRoute('project');
     }
